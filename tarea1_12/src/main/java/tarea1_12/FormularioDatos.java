@@ -28,6 +28,7 @@ public class FormularioDatos extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroupTipo = new javax.swing.ButtonGroup();
+        buttonGroupServicios = new javax.swing.ButtonGroup();
         jLabelCodigo = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
         jLabelApellidos = new javax.swing.JLabel();
@@ -43,23 +44,25 @@ public class FormularioDatos extends javax.swing.JDialog {
         jTextFieldFecha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabelTipoRef = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButtonSanitarios = new javax.swing.JRadioButton();
+        jRadioButtonPavimento = new javax.swing.JRadioButton();
+        jRadioButtonIntegral = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabelServicios = new javax.swing.JLabel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        jRadioButtonEstructura = new javax.swing.JRadioButton();
+        jRadioButtonCimentacion = new javax.swing.JRadioButton();
+        jRadioButtonAlbanileria = new javax.swing.JRadioButton();
+        jRadioButtonCarpinteria = new javax.swing.JRadioButton();
+        jRadioButtonFontaneria = new javax.swing.JRadioButton();
+        jRadioButtonDecoracion = new javax.swing.JRadioButton();
         jLabelEncargado = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxEncargado = new javax.swing.JComboBox<>();
         jLabelCoste = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextFieldCoste = new javax.swing.JTextField();
+        jButtonGuardarRegistro = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,126 +99,136 @@ public class FormularioDatos extends javax.swing.JDialog {
         jLabelTipoRef.setText("TIPO DE REFORMA");
         jLabelTipoRef.setToolTipText("Reforma a realizar");
 
-        buttonGroupTipo.add(jRadioButton1);
-        jRadioButton1.setText("Sanitarios");
+        buttonGroupTipo.add(jRadioButtonSanitarios);
+        jRadioButtonSanitarios.setText("Sanitarios");
 
-        buttonGroupTipo.add(jRadioButton2);
-        jRadioButton2.setText("Pavimento");
+        buttonGroupTipo.add(jRadioButtonPavimento);
+        jRadioButtonPavimento.setText("Pavimento");
 
-        buttonGroupTipo.add(jRadioButton3);
-        jRadioButton3.setText("Integral");
+        buttonGroupTipo.add(jRadioButtonIntegral);
+        jRadioButtonIntegral.setText("Integral");
 
         jLabelServicios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelServicios.setText("SERVICIOS:");
         jLabelServicios.setToolTipText("Servicios a contratar");
 
-        jRadioButton4.setText("Estructura");
+        buttonGroupServicios.add(jRadioButtonEstructura);
+        jRadioButtonEstructura.setText("Estructura");
 
-        jRadioButton5.setText("Cimentación");
+        buttonGroupServicios.add(jRadioButtonCimentacion);
+        jRadioButtonCimentacion.setText("Cimentación");
 
-        jRadioButton6.setText("Albañilería");
+        buttonGroupServicios.add(jRadioButtonAlbanileria);
+        jRadioButtonAlbanileria.setText("Albañilería");
 
-        jRadioButton7.setText("Carpintería");
+        buttonGroupServicios.add(jRadioButtonCarpinteria);
+        jRadioButtonCarpinteria.setText("Carpintería");
 
-        jRadioButton8.setText("Fontanería");
+        buttonGroupServicios.add(jRadioButtonFontaneria);
+        jRadioButtonFontaneria.setText("Fontanería");
 
-        jRadioButton9.setText("Decoración");
+        buttonGroupServicios.add(jRadioButtonDecoracion);
+        jRadioButtonDecoracion.setText("Decoración");
 
         jLabelEncargado.setText("ENCARGADO:");
         jLabelEncargado.setToolTipText("Encargado de la reforma");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleados propios", "Autónomos", "Subcontrata" }));
+        jComboBoxEncargado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleados propios", "Autónomos", "Subcontrata" }));
+        jComboBoxEncargado.setSelectedIndex(-1);
 
         jLabelCoste.setText("COSTE POR HORA");
         jLabelCoste.setToolTipText("Coste €/Hora");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCoste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldCosteActionPerformed(evt);
             }
         });
 
-        jButton1.setText("GUARDAR");
+        jButtonGuardarRegistro.setText("GUARDAR REGISTRO");
 
-        jButton2.setText("SALIR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalir.setText("SALIR");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSalirActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Nº Empleados");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelApellidos)
-                            .addComponent(jLabelTelefono)
-                            .addComponent(jLabelNombre)
-                            .addComponent(jLabelCodigo))
+                            .addComponent(jLabelDireccion)
+                            .addComponent(jLabelFecha))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(jTextFieldApellidos)
-                            .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelDireccion)
-                                    .addComponent(jLabelFecha))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDireccion)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jLabelTipoRef)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonSanitarios))
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButtonPavimento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonIntegral))
+                    .addComponent(jLabelServicios)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jRadioButtonEstructura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonFontaneria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jRadioButtonDecoracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButtonCimentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonCarpinteria)
+                            .addComponent(jRadioButtonAlbanileria)))
+                    .addComponent(jLabel7)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelServicios)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jRadioButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButton7)
-                                            .addComponent(jRadioButton6)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabelTipoRef)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jRadioButton1))
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelEncargado)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelCoste)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(72, 72, 72)
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2)))
-                                .addGap(0, 22, Short.MAX_VALUE)))))
+                                .addComponent(jLabelEncargado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(jButtonGuardarRegistro)))
+                        .addGap(41, 41, 41)
+                        .addComponent(jButtonSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelCoste)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldCoste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 21, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelApellidos)
+                    .addComponent(jLabelTelefono)
+                    .addComponent(jLabelNombre)
+                    .addComponent(jLabelCodigo))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(jTextFieldApellidos)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jSeparator1)
@@ -257,31 +270,35 @@ public class FormularioDatos extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoRef)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jRadioButtonSanitarios)
+                    .addComponent(jRadioButtonPavimento)
+                    .addComponent(jRadioButtonIntegral))
                 .addGap(24, 24, 24)
                 .addComponent(jLabelServicios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(jRadioButtonEstructura)
+                    .addComponent(jRadioButtonCimentacion)
+                    .addComponent(jRadioButtonAlbanileria))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton8)
-                    .addComponent(jRadioButton9)
-                    .addComponent(jRadioButton7))
+                    .addComponent(jRadioButtonFontaneria)
+                    .addComponent(jRadioButtonDecoracion)
+                    .addComponent(jRadioButtonCarpinteria))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEncargado)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(jComboBoxEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCoste)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jTextFieldCoste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardarRegistro)
+                    .addComponent(jButtonSalir))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -294,13 +311,13 @@ public class FormularioDatos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldCosteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCosteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldCosteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,10 +362,12 @@ public class FormularioDatos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupServicios;
     private javax.swing.ButtonGroup buttonGroupTipo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonGuardarRegistro;
+    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JComboBox<String> jComboBoxEncargado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelApellidos;
@@ -361,19 +380,20 @@ public class FormularioDatos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelServicios;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTipoRef;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JRadioButton jRadioButtonAlbanileria;
+    private javax.swing.JRadioButton jRadioButtonCarpinteria;
+    private javax.swing.JRadioButton jRadioButtonCimentacion;
+    private javax.swing.JRadioButton jRadioButtonDecoracion;
+    private javax.swing.JRadioButton jRadioButtonEstructura;
+    private javax.swing.JRadioButton jRadioButtonFontaneria;
+    private javax.swing.JRadioButton jRadioButtonIntegral;
+    private javax.swing.JRadioButton jRadioButtonPavimento;
+    private javax.swing.JRadioButton jRadioButtonSanitarios;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldCodigo;
+    private javax.swing.JTextField jTextFieldCoste;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldNombre;
