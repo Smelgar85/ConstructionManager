@@ -11,12 +11,22 @@
             <artifactId>ValidationAPI</artifactId>
             <version>RELEASE180</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util</artifactId>
+            <version>RELEASE190</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE190</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.tarea1_12.Tarea1_12</exec.mainClass>
+        <exec.mainClass>tarea1_12.FormularioPrincipal</exec.mainClass>
     </properties>
     
     

@@ -52,7 +52,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="940" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelIMG" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonNuevaRef" max="32767" attributes="0"/>
                   </Group>
@@ -66,7 +66,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelIMG" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonNuevaRef" min="-2" pref="77" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -77,10 +77,10 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelIMG">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Img/Logo_Construccion_small.png"/>
+          <Image iconType="2" name="C:\Users\FULLPOWAH\Documents\NetBeansProjects\ud1final-Smelgar85\tarea1_12\src\main\java\images\Logo_Construccion_small.png"/>
         </Property>
         <Property name="debugGraphicsOptions" type="int" value="-1"/>
       </Properties>
@@ -89,6 +89,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nueva Reforma"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNuevaRefActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

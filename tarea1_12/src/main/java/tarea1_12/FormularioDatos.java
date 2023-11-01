@@ -4,6 +4,13 @@
  */
 package tarea1_12;
 
+import java.util.Locale;
+import org.netbeans.validation.api.builtin.stringvalidation.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
+import org.netbeans.validation.api.ui.ValidationGroup;
+
 /**
  *
  * @author Sebastián Melgar Marín
@@ -12,10 +19,35 @@ public class FormularioDatos extends javax.swing.JDialog {
 
     /**
      * Creates new form FormularioDatos
+     * @param parent
+     * @param modal
      */
     public FormularioDatos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jButtonGuardarRegistro.setEnabled(false);
+        ValidationGroup group = validationPanel1.getValidationGroup();
+        group.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING, new CODIGOValidacion());
+        group.add(jTextFieldNombre, StringValidators.REQUIRE_NON_EMPTY_STRING, new NOMBREValidacion());
+        group.add(jTextFieldApellidos, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
+        group.add(jTextFieldTelefono, StringValidators.REQUIRE_NON_EMPTY_STRING, new TELFValidacion());
+        group.add(jTextFieldDireccion, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
+        group.add(jFormattedTextFieldFecha, StringValidators.REQUIRE_NON_EMPTY_STRING);
+        group.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING);
+        group.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING);
+        group.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING);
+        group.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING);
+                 
+         validationPanel1.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (validationPanel1.getProblem() == null)
+                    jButtonGuardarRegistro.setEnabled(true);
+            else
+                    jButtonGuardarRegistro.setEnabled(false);
+            
+            }
+        });
     }
 
     /**
@@ -41,7 +73,6 @@ public class FormularioDatos extends javax.swing.JDialog {
         jTextFieldApellidos = new javax.swing.JTextField();
         jTextFieldTelefono = new javax.swing.JTextField();
         jTextFieldDireccion = new javax.swing.JTextField();
-        jTextFieldFecha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabelTipoRef = new javax.swing.JLabel();
         jRadioButtonSanitarios = new javax.swing.JRadioButton();
@@ -63,6 +94,8 @@ public class FormularioDatos extends javax.swing.JDialog {
         jButtonSalir = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
+        validationPanel1 = new org.netbeans.validation.api.ui.swing.ValidationPanel();
+        jFormattedTextFieldFecha = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,11 +120,20 @@ public class FormularioDatos extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("DATOS DEL CLIENTE");
 
+        jTextFieldCodigo.setName("Código"); // NOI18N
+
+        jTextFieldNombre.setName("Nombre"); // NOI18N
+
+        jTextFieldApellidos.setName("Apellidos"); // NOI18N
+
+        jTextFieldTelefono.setName("Teléfono"); // NOI18N
         jTextFieldTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTelefonoActionPerformed(evt);
             }
         });
+
+        jTextFieldDireccion.setName("Dirección"); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("DATOS DE LA REFORMA");
@@ -156,21 +198,23 @@ public class FormularioDatos extends javax.swing.JDialog {
 
         jLabel1.setText("Nº Empleados");
 
+        jFormattedTextFieldFecha.setName("Fecha"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelDireccion)
                             .addComponent(jLabelFecha))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -195,7 +239,10 @@ public class FormularioDatos extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButtonCarpinteria)
                             .addComponent(jRadioButtonAlbanileria)))
-                    .addComponent(jLabel7)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(39, 39, 39)
+                        .addComponent(validationPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -228,7 +275,7 @@ public class FormularioDatos extends javax.swing.JDialog {
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(jTextFieldApellidos)
                     .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jSeparator1)
@@ -238,8 +285,10 @@ public class FormularioDatos extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(validationPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
                     .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,7 +311,7 @@ public class FormularioDatos extends javax.swing.JDialog {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFecha)
-                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -299,7 +348,7 @@ public class FormularioDatos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardarRegistro)
                     .addComponent(jButtonSalir))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -348,7 +397,9 @@ public class FormularioDatos extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
+                Locale.setDefault(new Locale("es", "ES"));
                 FormularioDatos dialog = new FormularioDatos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -367,6 +418,7 @@ public class FormularioDatos extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGuardarRegistro;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxEncargado;
+    private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -395,8 +447,8 @@ public class FormularioDatos extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldCoste;
     private javax.swing.JTextField jTextFieldDireccion;
-    private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
+    private org.netbeans.validation.api.ui.swing.ValidationPanel validationPanel1;
     // End of variables declaration//GEN-END:variables
 }

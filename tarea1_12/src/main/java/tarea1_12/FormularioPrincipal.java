@@ -4,6 +4,9 @@
  */
 package tarea1_12;
 
+import java.util.Locale;
+
+
 /**
  *
  * @author Sebastián Melgar Marín
@@ -15,6 +18,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
         initComponents();
+        
     }
 
     /**
@@ -26,7 +30,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelIMG = new javax.swing.JLabel();
         jButtonNuevaRef = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -37,10 +41,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Logo_Construccion_small.png"))); // NOI18N
-        jLabel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jLabelIMG.setIcon(new javax.swing.ImageIcon("C:\\Users\\FULLPOWAH\\Documents\\NetBeansProjects\\ud1final-Smelgar85\\tarea1_12\\src\\main\\java\\images\\Logo_Construccion_small.png")); // NOI18N
+        jLabelIMG.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jButtonNuevaRef.setText("Nueva Reforma");
+        jButtonNuevaRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNuevaRefActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,7 +82,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelIMG)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -83,7 +92,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelIMG)
                     .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -92,6 +101,11 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonNuevaRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaRefActionPerformed
+        FormularioDatos formulario = new FormularioDatos(this,true);
+        formulario.setVisible(true);
+    }//GEN-LAST:event_jButtonNuevaRefActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +136,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
+                Locale.setDefault(new Locale("es", "ES"));
                 new FormularioPrincipal().setVisible(true);
             }
         });
@@ -130,7 +146,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNuevaRef;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelIMG;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemNuevaRef;
     private javax.swing.JMenuItem jMenuItemSalir;
