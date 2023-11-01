@@ -44,14 +44,9 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelTipoRef" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonSanitarios" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelTipoRef" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonSanitarios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jRadioButtonPavimento" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -77,7 +72,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="validationPanel1" max="32767" attributes="0"/>
+                      <Component id="validationPanelCliente" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -97,11 +92,16 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabelCoste" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextFieldCoste" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCoste" min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerNEmpleados" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="validationPanelReforma" min="-2" pref="238" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
@@ -135,7 +135,7 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel7" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="validationPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="validationPanelCliente" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -170,44 +170,49 @@
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelTipoRef" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonSanitarios" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonPavimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonIntegral" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="jLabelServicios" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButtonEstructura" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonCimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonAlbanileria" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButtonFontaneria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonDecoracion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButtonCarpinteria" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelEncargado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxEncargado" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelCoste" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldCoste" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonGuardarRegistro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelTipoRef" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonSanitarios" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonPavimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonIntegral" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jLabelServicios" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButtonEstructura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonCimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonAlbanileria" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButtonFontaneria" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonDecoracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonCarpinteria" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelEncargado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxEncargado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelCoste" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCoste" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jSpinnerNEmpleados" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonGuardarRegistro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="validationPanelReforma" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
@@ -308,6 +313,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Sanitarios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonSanitariosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonPavimento">
       <Properties>
@@ -316,6 +324,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pavimento"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonPavimentoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonIntegral">
       <Properties>
@@ -324,6 +335,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Integral"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonIntegralActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -338,49 +352,31 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonEstructura">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Estructura"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonCimentacion">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Cimentaci&#xf3;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonAlbanileria">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Alba&#xf1;iler&#xed;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonCarpinteria">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Carpinter&#xed;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonFontaneria">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Fontaner&#xed;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonDecoracion">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupServicios"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Decoraci&#xf3;n"/>
       </Properties>
     </Component>
@@ -401,6 +397,9 @@
         </Property>
         <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxEncargadoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -429,19 +428,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalirActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="jSpinnerNEmpleados">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xba; Empleados"/>
       </Properties>
     </Component>
-    <Component class="org.netbeans.validation.api.ui.swing.ValidationPanel" name="validationPanel1">
+    <Component class="org.netbeans.validation.api.ui.swing.ValidationPanel" name="validationPanelCliente">
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldFecha">
       <Properties>
         <Property name="name" type="java.lang.String" value="Fecha" noResource="true"/>
       </Properties>
+    </Component>
+    <Component class="org.netbeans.validation.api.ui.swing.ValidationPanel" name="validationPanelReforma">
     </Component>
   </SubComponents>
 </Form>

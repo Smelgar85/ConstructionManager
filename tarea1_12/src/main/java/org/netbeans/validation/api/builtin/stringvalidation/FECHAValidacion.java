@@ -17,11 +17,11 @@ public class FECHAValidacion extends StringValidator {
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
         // Definimos el patrón de expresión regular para validar el DNI
-        String regex = "^(1[0-2]|0?[1-9])/(3[01]|[12][0-9]|0?[1-9])/(?:[0-9]{2})?[0-9]{2}$";
+        String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("Máximo 20 caracteres (solo letras)");
+            prblms.add("Introduce la fecha en formato dd/mm/yyyy");
         }
     }
 }

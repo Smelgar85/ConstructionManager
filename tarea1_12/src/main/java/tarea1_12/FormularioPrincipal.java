@@ -64,9 +64,19 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jMenuPrincipal.setText("Gestionar reformas");
 
         jMenuItemNuevaRef.setText("Nueva reforma");
+        jMenuItemNuevaRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNuevaRefActionPerformed(evt);
+            }
+        });
         jMenuPrincipal.add(jMenuItemNuevaRef);
 
         jMenuItemSalir.setText("Salir");
+        jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalirActionPerformed(evt);
+            }
+        });
         jMenuPrincipal.add(jMenuItemSalir);
 
         jMenuBar1.add(jMenuPrincipal);
@@ -106,6 +116,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         FormularioDatos formulario = new FormularioDatos(this,true);
         formulario.setVisible(true);
     }//GEN-LAST:event_jButtonNuevaRefActionPerformed
+
+    private void jMenuItemNuevaRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevaRefActionPerformed
+        FormularioDatos formulario = new FormularioDatos(this,true);
+        formulario.setVisible(true);
+    }//GEN-LAST:event_jMenuItemNuevaRefActionPerformed
+
+    private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     /**
      * @param args the command line arguments
