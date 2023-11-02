@@ -4,12 +4,15 @@
  */
 package tarea1_12;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import org.netbeans.validation.api.builtin.stringvalidation.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
 import org.netbeans.validation.api.ui.ValidationGroup;
 
@@ -18,16 +21,20 @@ import org.netbeans.validation.api.ui.ValidationGroup;
  * @author Sebastián Melgar Marín
  */
 public class FormularioDatos extends javax.swing.JDialog {
-
+         private FormularioPrincipal parentPrincipal;
     /**
      * Creates new form FormularioDatos
      * @param parent
      * @param modal
      */
-    public FormularioDatos(java.awt.Frame parent, boolean modal) {
+    
+    
+    
+    public FormularioDatos(FormularioPrincipal parent, boolean modal) {
         super(parent, modal);
+        this.parentPrincipal = parent;
         initComponents();
-        disableAllServices();
+        deshabilitaTodosServicios();
         jButtonGuardarRegistro.setEnabled(false);
         ValidationGroup groupCliente = validationPanelCliente.getValidationGroup();
         groupCliente.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING, new CODIGOValidacion());
@@ -55,32 +62,32 @@ public class FormularioDatos extends javax.swing.JDialog {
             }
         });
     }
-    private void enableSanitariosServices() {
-    // Habilita los servicios relacionados con reforma de Sanitarios
+    private void habilitaServiciosSanitarios() {
+    //Habilita los servicios relacionados con reforma de Sanitarios
     jRadioButtonAlbanileria.setEnabled(true);
     jRadioButtonFontaneria.setEnabled(true);
     jRadioButtonDecoracion.setEnabled(true);
 
-    // Deshabilita los demás servicios
+    //Deshabilita los demás servicios
     jRadioButtonEstructura.setEnabled(false);
     jRadioButtonCimentacion.setEnabled(false);
     jRadioButtonCarpinteria.setEnabled(false);
 }
 
-private void enablePavimentoServices() {
-    // Habilita los servicios relacionados con reforma de Pavimento
+private void habilitaServiciosPavimento() {
+    //Habilita los servicios relacionados con reforma de Pavimento
     jRadioButtonEstructura.setEnabled(true);
     jRadioButtonCimentacion.setEnabled(true);
 
-    // Deshabilita los demás servicios
+    //Deshabilita los demás servicios
     jRadioButtonAlbanileria.setEnabled(false);
     jRadioButtonFontaneria.setEnabled(false);
     jRadioButtonDecoracion.setEnabled(false);
     jRadioButtonCarpinteria.setEnabled(false);
 }
 
-private void enableIntegralServices() {
-    // Habilita los servicios relacionados con reforma Integral
+private void habilitaServiciosIntegral() {
+    //Habilita los servicios relacionados con reforma Integral
     jRadioButtonEstructura.setEnabled(true);
     jRadioButtonCimentacion.setEnabled(true);
     jRadioButtonAlbanileria.setEnabled(true);
@@ -89,14 +96,21 @@ private void enableIntegralServices() {
     jRadioButtonCarpinteria.setEnabled(true);
 }
 
-private void disableAllServices() {
-    // Deshabilita todos los servicios
+private void deshabilitaTodosServicios() {
+    //Deshabilita y desmarca todos los servicios
+    
     jRadioButtonEstructura.setEnabled(false);
+    jRadioButtonEstructura.setSelected(false);
     jRadioButtonCimentacion.setEnabled(false);
+    jRadioButtonCimentacion.setSelected(false);
     jRadioButtonAlbanileria.setEnabled(false);
+    jRadioButtonAlbanileria.setSelected(false);
     jRadioButtonFontaneria.setEnabled(false);
+    jRadioButtonFontaneria.setSelected(false);
     jRadioButtonDecoracion.setEnabled(false);
+    jRadioButtonDecoracion.setSelected(false);
     jRadioButtonCarpinteria.setEnabled(false);
+    jRadioButtonCarpinteria.setSelected(false);
 }
 private void updateCostePorHoraValidation(String selectedOption) {
     InputVerifier costePorHoraVerifier = new InputVerifier() {
@@ -170,6 +184,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
         validationPanelReforma = new org.netbeans.validation.api.ui.swing.ValidationPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelCodigo.setText("Codigo");
         jLabelCodigo.setToolTipText("Código de cliente (5 cifras)");
@@ -193,10 +208,25 @@ private void updateCostePorHoraValidation(String selectedOption) {
         jLabel7.setText("DATOS DEL CLIENTE");
 
         jTextFieldCodigo.setName("Código"); // NOI18N
+        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodigoActionPerformed(evt);
+            }
+        });
 
         jTextFieldNombre.setName("Nombre"); // NOI18N
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
 
         jTextFieldApellidos.setName("Apellidos"); // NOI18N
+        jTextFieldApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldApellidosActionPerformed(evt);
+            }
+        });
 
         jTextFieldTelefono.setName("Teléfono"); // NOI18N
         jTextFieldTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +236,11 @@ private void updateCostePorHoraValidation(String selectedOption) {
         });
 
         jTextFieldDireccion.setName("Dirección"); // NOI18N
+        jTextFieldDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDireccionActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("DATOS DE LA REFORMA");
@@ -242,16 +277,46 @@ private void updateCostePorHoraValidation(String selectedOption) {
         jLabelServicios.setToolTipText("Servicios a contratar");
 
         jRadioButtonEstructura.setText("Estructura");
+        jRadioButtonEstructura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEstructuraActionPerformed(evt);
+            }
+        });
 
         jRadioButtonCimentacion.setText("Cimentación");
+        jRadioButtonCimentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonCimentacionActionPerformed(evt);
+            }
+        });
 
         jRadioButtonAlbanileria.setText("Albañilería");
+        jRadioButtonAlbanileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAlbanileriaActionPerformed(evt);
+            }
+        });
 
         jRadioButtonCarpinteria.setText("Carpintería");
+        jRadioButtonCarpinteria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonCarpinteriaActionPerformed(evt);
+            }
+        });
 
         jRadioButtonFontaneria.setText("Fontanería");
+        jRadioButtonFontaneria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFontaneriaActionPerformed(evt);
+            }
+        });
 
         jRadioButtonDecoracion.setText("Decoración");
+        jRadioButtonDecoracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonDecoracionActionPerformed(evt);
+            }
+        });
 
         jLabelEncargado.setText("ENCARGADO:");
         jLabelEncargado.setToolTipText("Encargado de la reforma");
@@ -274,6 +339,11 @@ private void updateCostePorHoraValidation(String selectedOption) {
         });
 
         jButtonGuardarRegistro.setText("GUARDAR REGISTRO");
+        jButtonGuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarRegistroActionPerformed(evt);
+            }
+        });
 
         jButtonSalir.setText("SALIR");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +355,11 @@ private void updateCostePorHoraValidation(String selectedOption) {
         jLabel1.setText("Nº Empleados");
 
         jFormattedTextFieldFecha.setName("Fecha"); // NOI18N
+        jFormattedTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldFechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -455,33 +530,81 @@ private void updateCostePorHoraValidation(String selectedOption) {
     }//GEN-LAST:event_jTextFieldCosteActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        // TODO add your handling code here:
+       this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jRadioButtonSanitariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSanitariosActionPerformed
+        deshabilitaTodosServicios();
         if (jRadioButtonSanitarios.isSelected()) {
-            enableSanitariosServices();
+            habilitaServiciosSanitarios();
         } else {
-            disableAllServices();
+            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonSanitariosActionPerformed
 
     private void jRadioButtonPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPavimentoActionPerformed
-         if (jRadioButtonPavimento.isSelected()) {
-            enablePavimentoServices();
+        deshabilitaTodosServicios();
+        if (jRadioButtonPavimento.isSelected()) {
+            habilitaServiciosPavimento();
         } else {
-            disableAllServices();
+            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonPavimentoActionPerformed
 
     private void jRadioButtonIntegralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonIntegralActionPerformed
-      if (jRadioButtonIntegral.isSelected()) {
-            enableIntegralServices();
+        deshabilitaTodosServicios();
+        if (jRadioButtonIntegral.isSelected()) {
+            habilitaServiciosIntegral();
         } else {
-            disableAllServices();
+            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonIntegralActionPerformed
 
+    private String obtenerSeleccionTipo() {
+    if (jRadioButtonSanitarios.isSelected()) {
+        return "Sanitarios";
+    } else if (jRadioButtonPavimento.isSelected()) {
+        return "Pavimento";
+    } else if (jRadioButtonIntegral.isSelected()) {
+        return "Integral";
+    } else {
+        return "Ninguno seleccionado";
+    }
+}
+    
+   private String obtenerSeleccionesServicios() {
+    List<String> selecciones = new ArrayList<>();
+
+    if (jRadioButtonEstructura.isSelected()) {
+        selecciones.add("Estructura");
+    }
+    if (jRadioButtonCimentacion.isSelected()) {
+        selecciones.add("Cimentación");
+    }
+    if (jRadioButtonAlbanileria.isSelected()) {
+        selecciones.add("Albañilería");
+    }
+    if (jRadioButtonFontaneria.isSelected()) {
+        selecciones.add("Fontanería");
+    }
+    if (jRadioButtonDecoracion.isSelected()) {
+        selecciones.add("Decoración");
+    }
+    if (jRadioButtonCarpinteria.isSelected()) {
+        selecciones.add("Carpintería");
+    }
+
+    if (selecciones.isEmpty()) {
+        return "Ninguna selección";
+    } else {
+        // Convierte la lista de selecciones en un único String separado por comas y espacio
+        return String.join(", ", selecciones);
+    }
+}
+
+    
+    
+    
     private void jComboBoxEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncargadoActionPerformed
         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
         if (selectedOption.equals("Empleados propios")) {
@@ -493,6 +616,71 @@ private void updateCostePorHoraValidation(String selectedOption) {
         // Controlar el valor máximo del campo "Coste por hora de mano de obra (€)"
         updateCostePorHoraValidation(selectedOption);
     }//GEN-LAST:event_jComboBoxEncargadoActionPerformed
+
+    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jTextFieldApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldApellidosActionPerformed
+
+    private void jTextFieldDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDireccionActionPerformed
+
+    private void jFormattedTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldFechaActionPerformed
+
+    private void jRadioButtonEstructuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEstructuraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonEstructuraActionPerformed
+
+    private void jRadioButtonCimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCimentacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonCimentacionActionPerformed
+
+    private void jRadioButtonAlbanileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAlbanileriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonAlbanileriaActionPerformed
+
+    private void jRadioButtonFontaneriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFontaneriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonFontaneriaActionPerformed
+
+    private void jRadioButtonDecoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDecoracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonDecoracionActionPerformed
+
+    private void jRadioButtonCarpinteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCarpinteriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonCarpinteriaActionPerformed
+
+    private void jButtonGuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarRegistroActionPerformed
+       
+       String seleccionTipo = obtenerSeleccionTipo();
+       String seleccionServicios = obtenerSeleccionesServicios();
+       int valorEmpleados = (int) jSpinnerNEmpleados.getValue();
+       String []insercion = new String[11];
+       insercion[0]=jTextFieldCodigo.getText();
+       insercion[1]=jTextFieldNombre.getText();
+       insercion[2]=jTextFieldApellidos.getText();
+       insercion[4]=jTextFieldTelefono.getText();
+       insercion[3]=jTextFieldDireccion.getText();
+       insercion[5]=jFormattedTextFieldFecha.getText();
+       insercion[6]=seleccionTipo;
+       insercion[7]=seleccionServicios;
+       insercion[8]=(String) jComboBoxEncargado.getSelectedItem();
+       insercion[9]=jTextFieldCoste.getText();
+       insercion[10]=Integer.toString(valorEmpleados);
+       parentPrincipal.agregarFilaATabla(insercion);       
+              //FormularioPrincipal.jTablePrincipal.addRow(insercion);
+    }//GEN-LAST:event_jButtonGuardarRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,20 +710,21 @@ private void updateCostePorHoraValidation(String selectedOption) {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Locale.setDefault(new Locale("es", "ES"));
-                FormularioDatos dialog = new FormularioDatos(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+       java.awt.EventQueue.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            Locale.setDefault(new Locale("es", "ES"));
+            FormularioPrincipal mainFrame = new FormularioPrincipal(); // Asumiendo que FormularioPrincipal es tu ventana principal.
+            FormularioDatos dialog = new FormularioDatos(mainFrame, true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        }
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

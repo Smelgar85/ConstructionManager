@@ -5,6 +5,7 @@
 package tarea1_12;
 
 import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -33,7 +34,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jLabelIMG = new javax.swing.JLabel();
         jButtonNuevaRef = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrincipal = new javax.swing.JMenu();
         jMenuItemNuevaRef = new javax.swing.JMenuItem();
@@ -51,7 +52,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
@@ -59,7 +60,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 "Código", "Nombre", "Apellidos", "Direccion", "Telefono", "Fecha", "Tipo", "Servicios", "Encargado", "Coste", "Nº Empleados"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePrincipal);
 
         jMenuPrincipal.setText("Gestionar reformas");
 
@@ -89,13 +90,13 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelIMG)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +106,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabelIMG)
                     .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,6 +127,14 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
+public void agregarFilaATabla(String[] campos) {
+    if (campos.length != 11) {
+        throw new IllegalArgumentException("El array debe contener exactamente 11 elementos.");
+    }
+
+    DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
+    model.addRow(campos);
+}
     /**
      * @param args the command line arguments
      */
@@ -171,6 +180,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePrincipal;
     // End of variables declaration//GEN-END:variables
 }
