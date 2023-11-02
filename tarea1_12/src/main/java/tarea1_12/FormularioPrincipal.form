@@ -119,7 +119,7 @@
                 <Column editable="true" title="Tipo" type="java.lang.Object"/>
                 <Column editable="true" title="Servicios" type="java.lang.Object"/>
                 <Column editable="true" title="Encargado" type="java.lang.Object"/>
-                <Column editable="true" title="Coste" type="java.lang.Object"/>
+                <Column editable="true" title="&#x20ac;/Hora" type="java.lang.Object"/>
                 <Column editable="true" title="N&#xba; Empleados" type="java.lang.Object"/>
               </Table>
             </Property>

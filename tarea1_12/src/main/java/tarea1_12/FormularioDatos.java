@@ -12,7 +12,6 @@ import javax.swing.JComponent;
 import org.netbeans.validation.api.builtin.stringvalidation.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
 import org.netbeans.validation.api.ui.ValidationGroup;
 
@@ -36,6 +35,8 @@ public class FormularioDatos extends javax.swing.JDialog {
         initComponents();
         deshabilitaTodosServicios();
         jButtonGuardarRegistro.setEnabled(false);
+        jSpinnerNEmpleados.setValue(0);
+        jSpinnerNEmpleados.setEnabled(false);
         ValidationGroup groupCliente = validationPanelCliente.getValidationGroup();
         groupCliente.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING, new CODIGOValidacion());
         groupCliente.add(jTextFieldNombre, StringValidators.REQUIRE_NON_EMPTY_STRING, new NOMBREValidacion());
@@ -44,13 +45,13 @@ public class FormularioDatos extends javax.swing.JDialog {
         groupCliente.add(jTextFieldDireccion, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
         groupCliente.add(jFormattedTextFieldFecha, StringValidators.REQUIRE_NON_EMPTY_STRING, new FECHAValidacion());
         
-        /*ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
-        groupRegistro.add(buttonGroupTipo, StringValidators.REQUIRE_NON_EMPTY_STRING);
-        groupRegistro.add(buttonGroupServicios, StringValidators.REQUIRE_NON_EMPTY_STRING);
-        groupRegistro.add(jComboBoxEncargado, StringValidators.REQUIRE_NON_EMPTY_STRING);
-        groupRegistro.add(jTextFieldCoste);
-        groupRegistro.add(jSpinnerNEmpleados);
-    */
+        ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
+        //groupRegistro.add(buttonGroupTipo, );
+        //groupRegistro.add(buttonGroupServicios, );
+        //groupRegistro.add(jComboBoxEncargado, );
+        //groupRegistro.add(jTextFieldCoste, new COSTEValidacion(), new COSTESUBValitacion());
+        //groupRegistro.add(jSpinnerNEmpleados);
+    
         validationPanelCliente.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -62,7 +63,7 @@ public class FormularioDatos extends javax.swing.JDialog {
             }
         });
     }
-    private void habilitaServiciosSanitarios() {
+private void habilitaServiciosSanitarios() {
     //Habilita los servicios relacionados con reforma de Sanitarios
     jRadioButtonAlbanileria.setEnabled(true);
     jRadioButtonFontaneria.setEnabled(true);
@@ -121,7 +122,10 @@ private void updateCostePorHoraValidation(String selectedOption) {
                 try {
                     double costePorHora = Double.parseDouble(costePorHoraText);
                     if (selectedOption.equals("Subcontrata") && costePorHora > 80.0) {
-                        return false;
+                      double tempint;
+                      tempint=costePorHora; 
+                      ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
+                      groupRegistro.add(tempint, new COSTESUBValitacion(), new COSTEValidacion());
                     } else if (costePorHora > 99.99) {
                         return false;
                     }
@@ -352,7 +356,11 @@ private void updateCostePorHoraValidation(String selectedOption) {
             }
         });
 
+        jSpinnerNEmpleados.setModel(new javax.swing.SpinnerNumberModel(2, 2, 50, 1));
+        jSpinnerNEmpleados.setToolTipText("");
+
         jLabel1.setText("Nº Empleados");
+        jLabel1.setToolTipText("Empleados a contratar");
 
         jFormattedTextFieldFecha.setName("Fecha"); // NOI18N
         jFormattedTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -526,7 +534,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
     private void jTextFieldCosteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCosteActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldCosteActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -606,10 +614,12 @@ private void updateCostePorHoraValidation(String selectedOption) {
     
     
     private void jComboBoxEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncargadoActionPerformed
+        jSpinnerNEmpleados.setValue(0);
         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
         if (selectedOption.equals("Empleados propios")) {
             jSpinnerNEmpleados.setEnabled(false);
         } else if (selectedOption.equals("Autónomos") || selectedOption.equals("Subcontrata")) {
+            jSpinnerNEmpleados.setValue(2);
             jSpinnerNEmpleados.setEnabled(true);
         }
         

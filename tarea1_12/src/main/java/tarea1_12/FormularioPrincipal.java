@@ -57,7 +57,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nombre", "Apellidos", "Direccion", "Telefono", "Fecha", "Tipo", "Servicios", "Encargado", "Coste", "Nº Empleados"
+                "Código", "Nombre", "Apellidos", "Direccion", "Telefono", "Fecha", "Tipo", "Servicios", "Encargado", "€/Hora", "Nº Empleados"
             }
         ));
         jScrollPane1.setViewportView(jTablePrincipal);
