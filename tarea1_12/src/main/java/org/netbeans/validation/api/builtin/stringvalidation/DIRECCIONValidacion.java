@@ -12,16 +12,16 @@ import org.netbeans.validation.api.Problems;
  *
  * @author Sebastián Melgar Marín
  */
-public class NOMBREValidacion extends StringValidator {
+public class DIRECCIONValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
         // Definimos el patrón de expresión regular para validar el DNI
-        String regex = "[A-Za-zÁáÉéÍíÓóÚúÑñ ]{1,20}";
+        String regex = "[A-Za-zÁáÉéÍíÓóÚúÑñ ]{1,30}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("Máximo 20 caracteres (solo letras)");
+            prblms.add("Máximo 30 caracteres");
         }
     }
 }

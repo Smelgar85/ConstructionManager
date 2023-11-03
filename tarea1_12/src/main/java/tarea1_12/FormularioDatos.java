@@ -7,8 +7,6 @@ package tarea1_12;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
 import org.netbeans.validation.api.builtin.stringvalidation.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,15 +40,12 @@ public class FormularioDatos extends javax.swing.JDialog {
         groupCliente.add(jTextFieldNombre, StringValidators.REQUIRE_NON_EMPTY_STRING, new NOMBREValidacion());
         groupCliente.add(jTextFieldApellidos, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
         groupCliente.add(jTextFieldTelefono, StringValidators.REQUIRE_NON_EMPTY_STRING, new TELFValidacion());
-        groupCliente.add(jTextFieldDireccion, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
+        groupCliente.add(jTextFieldDireccion, StringValidators.REQUIRE_NON_EMPTY_STRING, new DIRECCIONValidacion());
         groupCliente.add(jFormattedTextFieldFecha, StringValidators.REQUIRE_NON_EMPTY_STRING, new FECHAValidacion());
         
         ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
-        //groupRegistro.add(buttonGroupTipo, );
-        //groupRegistro.add(buttonGroupServicios, );
-        //groupRegistro.add(jComboBoxEncargado, );
-        //groupRegistro.add(jTextFieldCoste, new COSTEValidacion(), new COSTESUBValitacion());
-        //groupRegistro.add(jSpinnerNEmpleados);
+        groupRegistro.add(jTextFieldCoste, new COSTEValidacion());
+        
     
         validationPanelCliente.addChangeListener(new ChangeListener() {
             @Override
@@ -113,31 +108,7 @@ private void deshabilitaTodosServicios() {
     jRadioButtonCarpinteria.setEnabled(false);
     jRadioButtonCarpinteria.setSelected(false);
 }
-private void updateCostePorHoraValidation(String selectedOption) {
-    InputVerifier costePorHoraVerifier = new InputVerifier() {
-        @Override
-        public boolean verify(JComponent input) {
-            String costePorHoraText = jTextFieldCoste.getText();
-            if (!costePorHoraText.isEmpty()) {
-                try {
-                    double costePorHora = Double.parseDouble(costePorHoraText);
-                    if (selectedOption.equals("Subcontrata") && costePorHora > 80.0) {
-                      double tempint;
-                      tempint=costePorHora; 
-                      ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
-                      groupRegistro.add(tempint, new COSTESUBValitacion(), new COSTEValidacion());
-                    } else if (costePorHora > 99.99) {
-                        return false;
-                    }
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    };
-    jTextFieldCoste.setInputVerifier(costePorHoraVerifier);
-}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -326,7 +297,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
         jLabelEncargado.setToolTipText("Encargado de la reforma");
 
         jComboBoxEncargado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleados propios", "Autónomos", "Subcontrata" }));
-        jComboBoxEncargado.setSelectedIndex(-1);
+        jComboBoxEncargado.setName("Tipo encargado"); // NOI18N
         jComboBoxEncargado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEncargadoActionPerformed(evt);
@@ -336,6 +307,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
         jLabelCoste.setText("COSTE POR HORA");
         jLabelCoste.setToolTipText("Coste €/Hora");
 
+        jTextFieldCoste.setName("Coste €/Hora"); // NOI18N
         jTextFieldCoste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCosteActionPerformed(evt);
@@ -358,6 +330,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
 
         jSpinnerNEmpleados.setModel(new javax.swing.SpinnerNumberModel(2, 2, 50, 1));
         jSpinnerNEmpleados.setToolTipText("");
+        jSpinnerNEmpleados.setName("Nº de empleados"); // NOI18N
 
         jLabel1.setText("Nº Empleados");
         jLabel1.setToolTipText("Empleados a contratar");
@@ -534,7 +507,21 @@ private void updateCostePorHoraValidation(String selectedOption) {
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
     private void jTextFieldCosteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCosteActionPerformed
-        
+         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+    try {
+        double coste = Double.parseDouble(jTextFieldCoste.getText().replace(',', '.'));
+        if (coste < 0) {
+            coste = 0.00;
+        } else if (selectedOption.equals("Subcontrata") && coste > 80.00) {
+            coste = 80.00;
+        } else if ((selectedOption.equals("Empleados propios") || selectedOption.equals("Autónomos")) && coste > 99.99) {
+            coste = 99.99;
+        }
+        jTextFieldCoste.setText(String.format("%.2f", coste).replace(',', '.'));
+    } catch (NumberFormatException e) {
+        // Manejar la excepción en caso de que el usuario ingrese un valor no válido.
+        jTextFieldCoste.setText("0.00");
+    }
     }//GEN-LAST:event_jTextFieldCosteActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -615,6 +602,7 @@ private void updateCostePorHoraValidation(String selectedOption) {
     
     private void jComboBoxEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncargadoActionPerformed
         jSpinnerNEmpleados.setValue(0);
+        jTextFieldCoste.setText("0.00");
         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
         if (selectedOption.equals("Empleados propios")) {
             jSpinnerNEmpleados.setEnabled(false);
@@ -622,9 +610,6 @@ private void updateCostePorHoraValidation(String selectedOption) {
             jSpinnerNEmpleados.setValue(2);
             jSpinnerNEmpleados.setEnabled(true);
         }
-        
-        // Controlar el valor máximo del campo "Coste por hora de mano de obra (€)"
-        updateCostePorHoraValidation(selectedOption);
     }//GEN-LAST:event_jComboBoxEncargadoActionPerformed
 
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
@@ -686,10 +671,22 @@ private void updateCostePorHoraValidation(String selectedOption) {
        insercion[6]=seleccionTipo;
        insercion[7]=seleccionServicios;
        insercion[8]=(String) jComboBoxEncargado.getSelectedItem();
-       insercion[9]=jTextFieldCoste.getText();
-       insercion[10]=Integer.toString(valorEmpleados);
-       parentPrincipal.agregarFilaATabla(insercion);       
-              //FormularioPrincipal.jTablePrincipal.addRow(insercion);
+       //A partir de aquí se valida que el coste no supere los límites establecidos, en caso de superarse, se dejan por defecto al valor más alto (o el más bajo).
+        double coste = Double.parseDouble(jTextFieldCoste.getText());
+        String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+        if (coste < 0) {
+            coste = 0.00;
+        } else if (selectedOption.equals("Subcontrata") && coste > 80.00) {
+            coste = 80.00;
+        } else if ((selectedOption.equals("Empleados propios") || selectedOption.equals("Autónomos")) && coste > 99.99) {
+            coste = 99.99;
+        }
+        jTextFieldCoste.setText(String.valueOf(coste));
+        insercion[9] = String.valueOf(coste);
+        insercion[10] = Integer.toString(valorEmpleados);
+        //Esto hace la inserción de la tabla:
+        parentPrincipal.agregarFilaATabla(insercion);
+
     }//GEN-LAST:event_jButtonGuardarRegistroActionPerformed
 
     /**
