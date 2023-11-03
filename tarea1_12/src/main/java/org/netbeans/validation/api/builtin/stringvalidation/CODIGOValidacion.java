@@ -16,12 +16,11 @@ public class CODIGOValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
-        // Definimos el patrón de expresión regular para validar el DNI
         String regex = "[0-9]{5}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("Formato de codigo incorrecto");
+            prblms.add("CODIGO: 5 dígitos");
         }
     }
 }

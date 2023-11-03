@@ -16,12 +16,11 @@ public class COSTEValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
-        // Definimos el patrón de expresión regular para validar el coste
-        String regex = "[0-9]?[0-9]{1}(\\.[0-9][0-9]?)?";
+        String regex = "[0-9]?[0-9]{1}(\\.[0-9]{2})?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("2 enteros, 2 decimales (opcional)");
+            prblms.add("Coste: 1 o 2 enteros + 2 decimales");
         }
     }
 }

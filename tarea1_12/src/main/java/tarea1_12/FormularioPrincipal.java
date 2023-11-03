@@ -52,6 +52,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTablePrincipal.setAutoCreateRowSorter(true);
         jTablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null}

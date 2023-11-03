@@ -21,7 +21,7 @@ public class NOMBREValidacion extends StringValidator {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("Máximo 20 caracteres (solo letras)");
+            prblms.add("Nombre: Máximo 20 caracteres (solo letras)");
         }
     }
 }

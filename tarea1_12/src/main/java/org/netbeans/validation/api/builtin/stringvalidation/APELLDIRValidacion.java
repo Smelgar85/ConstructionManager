@@ -16,12 +16,11 @@ public class APELLDIRValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
-        // Definimos el patrón de expresión regular para validar el DNI
         String regex = "[A-Za-zÁáÉéÍíÓóÚúÑñ ]{1,30}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("Máximo 30 caracteres (solo letras)");
+            prblms.add("Apellidos: máximo 30 caracteres (solo letras)");
         }
     }
 }

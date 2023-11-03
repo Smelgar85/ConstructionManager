@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import org.netbeans.validation.api.builtin.stringvalidation.*;
+import org.netbeans.validation.api.ui.*;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
 import org.netbeans.validation.api.ui.ValidationGroup;
 
@@ -18,7 +18,7 @@ import org.netbeans.validation.api.ui.ValidationGroup;
  * @author Sebastián Melgar Marín
  */
 public class FormularioDatos extends javax.swing.JDialog {
-         private FormularioPrincipal parentPrincipal;
+         private final FormularioPrincipal parentPrincipal;
     /**
      * Creates new form FormularioDatos
      * @param parent
@@ -36,26 +36,21 @@ public class FormularioDatos extends javax.swing.JDialog {
         jSpinnerNEmpleados.setValue(0);
         jSpinnerNEmpleados.setEnabled(false);
         ValidationGroup groupCliente = validationPanelCliente.getValidationGroup();
-        groupCliente.add(jTextFieldCodigo, StringValidators.REQUIRE_NON_EMPTY_STRING, new CODIGOValidacion());
-        groupCliente.add(jTextFieldNombre, StringValidators.REQUIRE_NON_EMPTY_STRING, new NOMBREValidacion());
-        groupCliente.add(jTextFieldApellidos, StringValidators.REQUIRE_NON_EMPTY_STRING, new APELLDIRValidacion());
-        groupCliente.add(jTextFieldTelefono, StringValidators.REQUIRE_NON_EMPTY_STRING, new TELFValidacion());
-        groupCliente.add(jTextFieldDireccion, StringValidators.REQUIRE_NON_EMPTY_STRING, new DIRECCIONValidacion());
-        groupCliente.add(jFormattedTextFieldFecha, StringValidators.REQUIRE_NON_EMPTY_STRING, new FECHAValidacion());
-        
-        ValidationGroup groupRegistro = validationPanelReforma.getValidationGroup();
-        groupRegistro.add(jTextFieldCoste, new COSTEValidacion());
+        groupCliente.add(jTextFieldCodigo, new CODIGOValidacion());
+        groupCliente.add(jTextFieldNombre, new NOMBREValidacion());
+        groupCliente.add(jTextFieldApellidos, new APELLDIRValidacion());
+        groupCliente.add(jTextFieldTelefono, new TELFValidacion());
+        groupCliente.add(jTextFieldDireccion, new DIRECCIONValidacion());
+        groupCliente.add(jFormattedTextFieldFecha, new FECHAValidacion());
+        groupCliente.add(jTextFieldCoste, new COSTEValidacion());
+        //groupCliente.add(buttonGroupTipo, );
         
     
-        validationPanelCliente.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (validationPanelCliente.getProblem() == null && validationPanelReforma.getProblem()==null)
-                    jButtonGuardarRegistro.setEnabled(true);
+        validationPanelCliente.addChangeListener((ChangeEvent e) -> {
+            if (validationPanelCliente.getProblem() == null)
+                jButtonGuardarRegistro.setEnabled(true);
             else
-                    jButtonGuardarRegistro.setEnabled(false);
-            
-            }
+                jButtonGuardarRegistro.setEnabled(false);
         });
     }
 private void habilitaServiciosSanitarios() {
@@ -127,13 +122,13 @@ private void deshabilitaTodosServicios() {
         jLabelDireccion = new javax.swing.JLabel();
         jLabelTelefono = new javax.swing.JLabel();
         jLabelFecha = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelDATOSCLIENTE = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellidos = new javax.swing.JTextField();
         jTextFieldTelefono = new javax.swing.JTextField();
         jTextFieldDireccion = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelDATOSREFORMA = new javax.swing.JLabel();
         jLabelTipoRef = new javax.swing.JLabel();
         jRadioButtonSanitarios = new javax.swing.JRadioButton();
         jRadioButtonPavimento = new javax.swing.JRadioButton();
@@ -153,7 +148,7 @@ private void deshabilitaTodosServicios() {
         jButtonGuardarRegistro = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jSpinnerNEmpleados = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelEmpleados = new javax.swing.JLabel();
         validationPanelCliente = new org.netbeans.validation.api.ui.swing.ValidationPanel();
         jFormattedTextFieldFecha = new javax.swing.JFormattedTextField();
         validationPanelReforma = new org.netbeans.validation.api.ui.swing.ValidationPanel();
@@ -179,8 +174,8 @@ private void deshabilitaTodosServicios() {
         jLabelFecha.setText("Fecha de alta");
         jLabelFecha.setToolTipText("Fecha de alta del cliente");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("DATOS DEL CLIENTE");
+        jLabelDATOSCLIENTE.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelDATOSCLIENTE.setText("DATOS DEL CLIENTE");
 
         jTextFieldCodigo.setName("Código"); // NOI18N
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -217,8 +212,8 @@ private void deshabilitaTodosServicios() {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("DATOS DE LA REFORMA");
+        jLabelDATOSREFORMA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelDATOSREFORMA.setText("DATOS DE LA REFORMA");
 
         jLabelTipoRef.setText("TIPO DE REFORMA");
         jLabelTipoRef.setToolTipText("Reforma a realizar");
@@ -332,8 +327,8 @@ private void deshabilitaTodosServicios() {
         jSpinnerNEmpleados.setToolTipText("");
         jSpinnerNEmpleados.setName("Nº de empleados"); // NOI18N
 
-        jLabel1.setText("Nº Empleados");
-        jLabel1.setToolTipText("Empleados a contratar");
+        jLabelEmpleados.setText("Nº Empleados");
+        jLabelEmpleados.setToolTipText("Empleados a contratar");
 
         jFormattedTextFieldFecha.setName("Fecha"); // NOI18N
         jFormattedTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -379,7 +374,7 @@ private void deshabilitaTodosServicios() {
                             .addComponent(jRadioButtonCarpinteria)
                             .addComponent(jRadioButtonAlbanileria)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(jLabelDATOSCLIENTE)
                         .addGap(39, 39, 39)
                         .addComponent(validationPanelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -398,11 +393,11 @@ private void deshabilitaTodosServicios() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldCoste, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelEmpleados)
                         .addGap(18, 18, 18)
                         .addComponent(jSpinnerNEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(jLabelDATOSREFORMA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(validationPanelReforma, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 21, Short.MAX_VALUE))
@@ -429,7 +424,7 @@ private void deshabilitaTodosServicios() {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDATOSCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(validationPanelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -460,7 +455,7 @@ private void deshabilitaTodosServicios() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(jLabelDATOSREFORMA)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTipoRef)
@@ -488,7 +483,7 @@ private void deshabilitaTodosServicios() {
                             .addComponent(jLabelCoste)
                             .addComponent(jTextFieldCoste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSpinnerNEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelEmpleados))
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonGuardarRegistro)
@@ -507,7 +502,7 @@ private void deshabilitaTodosServicios() {
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
     private void jTextFieldCosteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCosteActionPerformed
-         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+ String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
     try {
         double coste = Double.parseDouble(jTextFieldCoste.getText().replace(',', '.'));
         if (coste < 0) {
@@ -602,7 +597,7 @@ private void deshabilitaTodosServicios() {
     
     private void jComboBoxEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncargadoActionPerformed
         jSpinnerNEmpleados.setValue(0);
-        jTextFieldCoste.setText("0.00");
+        jTextFieldCoste.setText("");
         String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
         if (selectedOption.equals("Empleados propios")) {
             jSpinnerNEmpleados.setEnabled(false);
@@ -705,33 +700,26 @@ private void deshabilitaTodosServicios() {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormularioDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+             //</editor-fold>
+             
         //</editor-fold>
 
         /* Create and display the dialog */
-       java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-            Locale.setDefault(new Locale("es", "ES"));
-            FormularioPrincipal mainFrame = new FormularioPrincipal(); // Asumiendo que FormularioPrincipal es tu ventana principal.
-            FormularioDatos dialog = new FormularioDatos(mainFrame, true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
-        }
-    });
+       java.awt.EventQueue.invokeLater(() -> {
+           Locale.setDefault(new Locale("es", "ES"));
+           FormularioPrincipal mainFrame = new FormularioPrincipal();
+           FormularioDatos dialog = new FormularioDatos(mainFrame, true);
+           dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+               @Override
+               public void windowClosing(java.awt.event.WindowEvent e) {
+                   System.exit(0);
+               }
+           });
+           dialog.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -741,13 +729,13 @@ private void deshabilitaTodosServicios() {
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxEncargado;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelCoste;
+    private javax.swing.JLabel jLabelDATOSCLIENTE;
+    private javax.swing.JLabel jLabelDATOSREFORMA;
     private javax.swing.JLabel jLabelDireccion;
+    private javax.swing.JLabel jLabelEmpleados;
     private javax.swing.JLabel jLabelEncargado;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelNombre;

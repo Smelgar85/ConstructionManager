@@ -17,12 +17,11 @@ public class DNIValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String DNI, String t) {
-        // Definimos el patrón de expresión regular para validar el DNI
         String regex = "[0-9]{8}[A-Za-z]{1}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
-            prblms.add("El DNI no tiene el formato correcto (8 números seguidos de una letra).");
+            prblms.add("DNI: 8 números seguidos de una letra");
         }
     }
 }
