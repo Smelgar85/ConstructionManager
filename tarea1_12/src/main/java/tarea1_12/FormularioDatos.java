@@ -7,10 +7,9 @@ package tarea1_12;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import org.netbeans.validation.api.builtin.stringvalidation.*;
-import org.netbeans.validation.api.ui.*;
 import javax.swing.event.ChangeEvent;
-import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
 import org.netbeans.validation.api.ui.ValidationGroup;
 
 /**
@@ -43,9 +42,7 @@ public class FormularioDatos extends javax.swing.JDialog {
         groupCliente.add(jTextFieldDireccion, new DIRECCIONValidacion());
         groupCliente.add(jFormattedTextFieldFecha, new FECHAValidacion());
         groupCliente.add(jTextFieldCoste, new COSTEValidacion());
-        //groupCliente.add(buttonGroupTipo, );
-        
-    
+          
         validationPanelCliente.addChangeListener((ChangeEvent e) -> {
             if (validationPanelCliente.getProblem() == null)
                 jButtonGuardarRegistro.setEnabled(true);
@@ -53,55 +50,56 @@ public class FormularioDatos extends javax.swing.JDialog {
                 jButtonGuardarRegistro.setEnabled(false);
         });
     }
+    
 private void habilitaServiciosSanitarios() {
-    //Habilita los servicios relacionados con reforma de Sanitarios
-    jRadioButtonAlbanileria.setEnabled(true);
-    jRadioButtonFontaneria.setEnabled(true);
-    jRadioButtonDecoracion.setEnabled(true);
+    //Habilita los servicios de reforma de Sanitarios
+    jCheckBoxAlbanileria.setEnabled(true);
+    jCheckBoxFontaneria.setEnabled(true);
+    jCheckBoxDecoracion.setEnabled(true);
 
     //Deshabilita los demás servicios
-    jRadioButtonEstructura.setEnabled(false);
-    jRadioButtonCimentacion.setEnabled(false);
-    jRadioButtonCarpinteria.setEnabled(false);
+    jCheckBoxEstructura.setEnabled(false);
+    jCheckBoxCimentacion.setEnabled(false);
+    jCheckBoxCarpinteria.setEnabled(false);
 }
 
 private void habilitaServiciosPavimento() {
-    //Habilita los servicios relacionados con reforma de Pavimento
-    jRadioButtonEstructura.setEnabled(true);
-    jRadioButtonCimentacion.setEnabled(true);
+    //Habilita los servicios de reforma de Pavimento
+    jCheckBoxEstructura.setEnabled(true);
+    jCheckBoxCimentacion.setEnabled(true);
 
     //Deshabilita los demás servicios
-    jRadioButtonAlbanileria.setEnabled(false);
-    jRadioButtonFontaneria.setEnabled(false);
-    jRadioButtonDecoracion.setEnabled(false);
-    jRadioButtonCarpinteria.setEnabled(false);
+    jCheckBoxAlbanileria.setEnabled(false);
+    jCheckBoxFontaneria.setEnabled(false);
+    jCheckBoxDecoracion.setEnabled(false);
+    jCheckBoxCarpinteria.setEnabled(false);
 }
 
 private void habilitaServiciosIntegral() {
-    //Habilita los servicios relacionados con reforma Integral
-    jRadioButtonEstructura.setEnabled(true);
-    jRadioButtonCimentacion.setEnabled(true);
-    jRadioButtonAlbanileria.setEnabled(true);
-    jRadioButtonFontaneria.setEnabled(true);
-    jRadioButtonDecoracion.setEnabled(true);
-    jRadioButtonCarpinteria.setEnabled(true);
+    //Habilita los servicios de reforma Integral (todos)
+    jCheckBoxEstructura.setEnabled(true);
+    jCheckBoxCimentacion.setEnabled(true);
+    jCheckBoxAlbanileria.setEnabled(true);
+    jCheckBoxFontaneria.setEnabled(true);
+    jCheckBoxDecoracion.setEnabled(true);
+    jCheckBoxCarpinteria.setEnabled(true);
 }
 
 private void deshabilitaTodosServicios() {
-    //Deshabilita y desmarca todos los servicios
+    //Deshabilita y desmarca todos los servicios, para reiniciar los valores al cambiar de tipo de reforma.
     
-    jRadioButtonEstructura.setEnabled(false);
-    jRadioButtonEstructura.setSelected(false);
-    jRadioButtonCimentacion.setEnabled(false);
-    jRadioButtonCimentacion.setSelected(false);
-    jRadioButtonAlbanileria.setEnabled(false);
-    jRadioButtonAlbanileria.setSelected(false);
-    jRadioButtonFontaneria.setEnabled(false);
-    jRadioButtonFontaneria.setSelected(false);
-    jRadioButtonDecoracion.setEnabled(false);
-    jRadioButtonDecoracion.setSelected(false);
-    jRadioButtonCarpinteria.setEnabled(false);
-    jRadioButtonCarpinteria.setSelected(false);
+    jCheckBoxEstructura.setEnabled(false);
+    jCheckBoxEstructura.setSelected(false);
+    jCheckBoxCimentacion.setEnabled(false);
+    jCheckBoxCimentacion.setSelected(false);
+    jCheckBoxAlbanileria.setEnabled(false);
+    jCheckBoxAlbanileria.setSelected(false);
+    jCheckBoxFontaneria.setEnabled(false);
+    jCheckBoxFontaneria.setSelected(false);
+    jCheckBoxDecoracion.setEnabled(false);
+    jCheckBoxDecoracion.setSelected(false);
+    jCheckBoxCarpinteria.setEnabled(false);
+    jCheckBoxCarpinteria.setSelected(false);
 }
 
 
@@ -115,7 +113,6 @@ private void deshabilitaTodosServicios() {
     private void initComponents() {
 
         buttonGroupTipo = new javax.swing.ButtonGroup();
-        buttonGroupServicios = new javax.swing.ButtonGroup();
         jLabelCodigo = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
         jLabelApellidos = new javax.swing.JLabel();
@@ -135,12 +132,6 @@ private void deshabilitaTodosServicios() {
         jRadioButtonIntegral = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabelServicios = new javax.swing.JLabel();
-        jRadioButtonEstructura = new javax.swing.JRadioButton();
-        jRadioButtonCimentacion = new javax.swing.JRadioButton();
-        jRadioButtonAlbanileria = new javax.swing.JRadioButton();
-        jRadioButtonCarpinteria = new javax.swing.JRadioButton();
-        jRadioButtonFontaneria = new javax.swing.JRadioButton();
-        jRadioButtonDecoracion = new javax.swing.JRadioButton();
         jLabelEncargado = new javax.swing.JLabel();
         jComboBoxEncargado = new javax.swing.JComboBox<>();
         jLabelCoste = new javax.swing.JLabel();
@@ -152,6 +143,12 @@ private void deshabilitaTodosServicios() {
         validationPanelCliente = new org.netbeans.validation.api.ui.swing.ValidationPanel();
         jFormattedTextFieldFecha = new javax.swing.JFormattedTextField();
         validationPanelReforma = new org.netbeans.validation.api.ui.swing.ValidationPanel();
+        jCheckBoxEstructura = new javax.swing.JCheckBox();
+        jCheckBoxCimentacion = new javax.swing.JCheckBox();
+        jCheckBoxAlbanileria = new javax.swing.JCheckBox();
+        jCheckBoxFontaneria = new javax.swing.JCheckBox();
+        jCheckBoxDecoracion = new javax.swing.JCheckBox();
+        jCheckBoxCarpinteria = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -246,48 +243,6 @@ private void deshabilitaTodosServicios() {
         jLabelServicios.setText("SERVICIOS:");
         jLabelServicios.setToolTipText("Servicios a contratar");
 
-        jRadioButtonEstructura.setText("Estructura");
-        jRadioButtonEstructura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonEstructuraActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonCimentacion.setText("Cimentación");
-        jRadioButtonCimentacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonCimentacionActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonAlbanileria.setText("Albañilería");
-        jRadioButtonAlbanileria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonAlbanileriaActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonCarpinteria.setText("Carpintería");
-        jRadioButtonCarpinteria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonCarpinteriaActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonFontaneria.setText("Fontanería");
-        jRadioButtonFontaneria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonFontaneriaActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonDecoracion.setText("Decoración");
-        jRadioButtonDecoracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonDecoracionActionPerformed(evt);
-            }
-        });
-
         jLabelEncargado.setText("ENCARGADO:");
         jLabelEncargado.setToolTipText("Encargado de la reforma");
 
@@ -337,6 +292,18 @@ private void deshabilitaTodosServicios() {
             }
         });
 
+        jCheckBoxEstructura.setText("Estructura");
+
+        jCheckBoxCimentacion.setText("Cimentación");
+
+        jCheckBoxAlbanileria.setText("Albañilería");
+
+        jCheckBoxFontaneria.setText("Fontanería");
+
+        jCheckBoxDecoracion.setText("Decoración");
+
+        jCheckBoxCarpinteria.setText("Carpintería");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -352,27 +319,7 @@ private void deshabilitaTodosServicios() {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTipoRef)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonSanitarios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonPavimento)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonIntegral))
                     .addComponent(jLabelServicios)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jRadioButtonEstructura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonFontaneria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRadioButtonDecoracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButtonCimentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonCarpinteria)
-                            .addComponent(jRadioButtonAlbanileria)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelDATOSCLIENTE)
                         .addGap(39, 39, 39)
@@ -399,7 +346,30 @@ private void deshabilitaTodosServicios() {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelDATOSREFORMA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(validationPanelReforma, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(validationPanelReforma, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelTipoRef)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonSanitarios)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonPavimento))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxEstructura)
+                                    .addComponent(jCheckBoxFontaneria))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxCimentacion)
+                                    .addComponent(jCheckBoxDecoracion))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxAlbanileria)
+                                    .addComponent(jCheckBoxCarpinteria))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonIntegral)))
                 .addGap(0, 21, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -466,14 +436,14 @@ private void deshabilitaTodosServicios() {
                         .addComponent(jLabelServicios)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonEstructura)
-                            .addComponent(jRadioButtonCimentacion)
-                            .addComponent(jRadioButtonAlbanileria))
+                            .addComponent(jCheckBoxEstructura)
+                            .addComponent(jCheckBoxCimentacion)
+                            .addComponent(jCheckBoxAlbanileria))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonFontaneria)
-                            .addComponent(jRadioButtonDecoracion)
-                            .addComponent(jRadioButtonCarpinteria))
+                            .addComponent(jCheckBoxFontaneria)
+                            .addComponent(jCheckBoxDecoracion)
+                            .addComponent(jCheckBoxCarpinteria))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelEncargado)
@@ -489,7 +459,7 @@ private void deshabilitaTodosServicios() {
                             .addComponent(jButtonGuardarRegistro)
                             .addComponent(jButtonSalir)))
                     .addComponent(validationPanelReforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -502,7 +472,10 @@ private void deshabilitaTodosServicios() {
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
 
     private void jTextFieldCosteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCosteActionPerformed
- String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+    /*Esto pasa la selección del encargado a String, para validar el coste. En caso de pulsar enter al introducir un valor superior o inferior, 
+      se establece el valor mínimo o máximo por defecto, manteniendo el valor decimal usando el punto.
+    */
+    String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
     try {
         double coste = Double.parseDouble(jTextFieldCoste.getText().replace(',', '.'));
         if (coste < 0) {
@@ -527,8 +500,6 @@ private void deshabilitaTodosServicios() {
         deshabilitaTodosServicios();
         if (jRadioButtonSanitarios.isSelected()) {
             habilitaServiciosSanitarios();
-        } else {
-            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonSanitariosActionPerformed
 
@@ -536,8 +507,6 @@ private void deshabilitaTodosServicios() {
         deshabilitaTodosServicios();
         if (jRadioButtonPavimento.isSelected()) {
             habilitaServiciosPavimento();
-        } else {
-            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonPavimentoActionPerformed
 
@@ -545,11 +514,10 @@ private void deshabilitaTodosServicios() {
         deshabilitaTodosServicios();
         if (jRadioButtonIntegral.isSelected()) {
             habilitaServiciosIntegral();
-        } else {
-            deshabilitaTodosServicios();
         }
     }//GEN-LAST:event_jRadioButtonIntegralActionPerformed
-
+    /*Esto sirve para obtener la selección del tipo de reforma.
+    */
     private String obtenerSeleccionTipo() {
     if (jRadioButtonSanitarios.isSelected()) {
         return "Sanitarios";
@@ -561,40 +529,50 @@ private void deshabilitaTodosServicios() {
         return "Ninguno seleccionado";
     }
 }
-    
+    /*Esto sirve para obtener los resultados de selección de servicios de reforma, que se insertan en un ArrayList, que al final se pasa a String.
+    El fin de esto, es poder insertarlo en la tabla final como String.    
+    */ 
    private String obtenerSeleccionesServicios() {
     List<String> selecciones = new ArrayList<>();
 
-    if (jRadioButtonEstructura.isSelected()) {
+    if (jCheckBoxEstructura.isSelected()) {
         selecciones.add("Estructura");
     }
-    if (jRadioButtonCimentacion.isSelected()) {
+    if (jCheckBoxCimentacion.isSelected()) {
         selecciones.add("Cimentación");
     }
-    if (jRadioButtonAlbanileria.isSelected()) {
+    if (jCheckBoxAlbanileria.isSelected()) {
         selecciones.add("Albañilería");
     }
-    if (jRadioButtonFontaneria.isSelected()) {
+    if (jCheckBoxFontaneria.isSelected()) {
         selecciones.add("Fontanería");
     }
-    if (jRadioButtonDecoracion.isSelected()) {
+    if (jCheckBoxDecoracion.isSelected()) {
         selecciones.add("Decoración");
     }
-    if (jRadioButtonCarpinteria.isSelected()) {
+    if (jCheckBoxCarpinteria.isSelected()) {
         selecciones.add("Carpintería");
     }
 
     if (selecciones.isEmpty()) {
         return "Ninguna selección";
     } else {
-        // Convierte la lista de selecciones en un único String separado por comas y espacio
+        //Convierte la lista de selecciones en un único String separado por comas y espacio
         return String.join(", ", selecciones);
     }
 }
+   
+   private boolean algunCheckBoxMarcado() {
+    //Verifica si al menos uno de los checkboxes está marcado, esto se usará en la verificación cuando se pulsa el botón guardar.
+    return jCheckBoxEstructura.isSelected() ||
+           jCheckBoxCimentacion.isSelected() ||
+           jCheckBoxAlbanileria.isSelected() ||
+           jCheckBoxFontaneria.isSelected() ||
+           jCheckBoxDecoracion.isSelected() ||
+           jCheckBoxCarpinteria.isSelected();
+}
 
-    
-    
-    
+            
     private void jComboBoxEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncargadoActionPerformed
         jSpinnerNEmpleados.setValue(0);
         jTextFieldCoste.setText("");
@@ -627,32 +605,25 @@ private void deshabilitaTodosServicios() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldFechaActionPerformed
 
-    private void jRadioButtonEstructuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEstructuraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonEstructuraActionPerformed
-
-    private void jRadioButtonCimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCimentacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonCimentacionActionPerformed
-
-    private void jRadioButtonAlbanileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAlbanileriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAlbanileriaActionPerformed
-
-    private void jRadioButtonFontaneriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFontaneriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonFontaneriaActionPerformed
-
-    private void jRadioButtonDecoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDecoracionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonDecoracionActionPerformed
-
-    private void jRadioButtonCarpinteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCarpinteriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonCarpinteriaActionPerformed
-
     private void jButtonGuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarRegistroActionPerformed
-       
+        double coste = Double.parseDouble(jTextFieldCoste.getText());
+        String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+        
+        if (!algunCheckBoxMarcado()) {
+        // Ningún servicio está marcado, muestra un mensaje y no procedas
+            JOptionPane.showMessageDialog(this, "Es necesario marcar un servicio", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(selectedOption.equals("Subcontrata") && coste > 80.00){
+           JOptionPane.showMessageDialog(this, "El precio máximo para subcontrata es de 80.00€", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if ((selectedOption.equals("Empleados propios") || selectedOption.equals("Autónomos")) && coste > 99.99) {
+           JOptionPane.showMessageDialog(this, "El precio máximo para Empleados propios y Autónomos es de 99.99€", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+           
        String seleccionTipo = obtenerSeleccionTipo();
        String seleccionServicios = obtenerSeleccionesServicios();
        int valorEmpleados = (int) jSpinnerNEmpleados.getValue();
@@ -666,9 +637,9 @@ private void deshabilitaTodosServicios() {
        insercion[6]=seleccionTipo;
        insercion[7]=seleccionServicios;
        insercion[8]=(String) jComboBoxEncargado.getSelectedItem();
-       //A partir de aquí se valida que el coste no supere los límites establecidos, en caso de superarse, se dejan por defecto al valor más alto (o el más bajo).
-        double coste = Double.parseDouble(jTextFieldCoste.getText());
-        String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+       /*Esto que sigue es redundante, pues el jDialog debería evitar que el usuario pueda introducir un valor superior al establecido.
+       En caso de que de alguna forma se introduzca un número superior, esto debería ajustarlos al nivel máximo y mínimo en caso de superar el umbral.
+        */
         if (coste < 0) {
             coste = 0.00;
         } else if (selectedOption.equals("Subcontrata") && coste > 80.00) {
@@ -723,10 +694,15 @@ private void deshabilitaTodosServicios() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroupServicios;
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JButton jButtonGuardarRegistro;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JCheckBox jCheckBoxAlbanileria;
+    private javax.swing.JCheckBox jCheckBoxCarpinteria;
+    private javax.swing.JCheckBox jCheckBoxCimentacion;
+    private javax.swing.JCheckBox jCheckBoxDecoracion;
+    private javax.swing.JCheckBox jCheckBoxEstructura;
+    private javax.swing.JCheckBox jCheckBoxFontaneria;
     private javax.swing.JComboBox<String> jComboBoxEncargado;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
     private javax.swing.JLabel jLabelApellidos;
@@ -742,12 +718,6 @@ private void deshabilitaTodosServicios() {
     private javax.swing.JLabel jLabelServicios;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTipoRef;
-    private javax.swing.JRadioButton jRadioButtonAlbanileria;
-    private javax.swing.JRadioButton jRadioButtonCarpinteria;
-    private javax.swing.JRadioButton jRadioButtonCimentacion;
-    private javax.swing.JRadioButton jRadioButtonDecoracion;
-    private javax.swing.JRadioButton jRadioButtonEstructura;
-    private javax.swing.JRadioButton jRadioButtonFontaneria;
     private javax.swing.JRadioButton jRadioButtonIntegral;
     private javax.swing.JRadioButton jRadioButtonPavimento;
     private javax.swing.JRadioButton jRadioButtonSanitarios;
