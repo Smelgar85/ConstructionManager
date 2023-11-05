@@ -15,7 +15,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-
 /**
  *
  * @author Sebastián Melgar Marín
@@ -35,7 +34,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     
     private void cargarDatosDesdeBD() {
     DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
-    model.setRowCount(0); // Limpiar la tabla antes de cargar datos
+    //Limpia la tabla antes de cargar datos
+    model.setRowCount(0); 
     String basedatos = "encargos";
     String url = "jdbc:sqlite:" + basedatos + ".db";
     
