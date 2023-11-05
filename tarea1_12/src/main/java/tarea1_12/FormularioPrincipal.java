@@ -64,7 +64,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     
     
     
-    
+   //Esto carga los datos de la BD en la tabla:
     try (Connection connection = DriverManager.getConnection(url)) {
         String selectQuery = "SELECT * FROM registro";
         try (Statement statement = connection.createStatement();
@@ -107,7 +107,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCod = new javax.swing.JTextField();
         jButtonBorrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrincipal = new javax.swing.JMenu();
         jMenuItemNuevaRef = new javax.swing.JMenuItem();
@@ -168,10 +168,10 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Actualizar listado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonActualizar.setText("Actualizar listado");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonActualizarActionPerformed(evt);
             }
         });
 
@@ -221,7 +221,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                                         .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
@@ -246,7 +246,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                                     .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonActualizar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -332,7 +332,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 preparedStatement.executeUpdate();
             }
 
-            // Remueve la fila seleccionada de la tabla
+            //Elimina la fila de la tabla.
             model.removeRow(selectedRow);
 
         } catch (SQLException ex) {
@@ -341,9 +341,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         cargarDatosDesdeBD();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
 
     /**
@@ -385,7 +385,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonNuevaRef;
     private javax.swing.JLabel jLabel1;
