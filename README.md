@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/9Bw70JKp)
-
 # TAREA 1.12. ELABORACIÓN DE UN PROGRAMA DE GESTIÓN DE SERVICIOS DE OBRA
 
 En primer lugar tuve que escoger un formato que mostrase correctamente los datos de cada reserva. Por comodidad y aprovechar más el espacio elegí un formato de ventana apaisado. Al estar los campos en horizontal, y ser tanto pensé que sería la mejor opción. En caso de introducir muchos elementos en la tabla, considero que sería óptimo implementar un “Scroll bar”, pero no he tenido tiempo.
