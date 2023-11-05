@@ -3,9 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tarea1_12;
-
+import org.sqlite.JDBC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Locale;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -13,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Sebastián Melgar Marín
  */
 public class FormularioPrincipal extends javax.swing.JFrame {
+    private TableRowSorter<DefaultTableModel> sorter;
 
     /**
      * Creates new form FormularioPrincipal
@@ -20,7 +26,18 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     public FormularioPrincipal() {
         initComponents();
         
+        
     }
+    
+    public void agregarFilaATabla(String[] campos) {
+    if (campos.length != 11) {
+        throw new IllegalArgumentException("El array debe contener exactamente 11 elementos.");
+    }
+
+    DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
+    model.addRow(campos);
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,12 +52,17 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jButtonNuevaRef = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePrincipal = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldFecha = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldCod = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrincipal = new javax.swing.JMenu();
         jMenuItemNuevaRef = new javax.swing.JMenuItem();
         jMenuItemSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabelIMG.setIcon(new javax.swing.ImageIcon("C:\\Users\\FULLPOWAH\\Documents\\NetBeansProjects\\ud1final-Smelgar85\\tarea1_12\\src\\main\\java\\images\\Logo_Construccion_small.png")); // NOI18N
         jLabelIMG.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -60,8 +82,32 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             new String [] {
                 "Código", "Nombre", "Apellidos", "Direccion", "Telefono", "Fecha", "Tipo", "Servicios", "Encargado", "€/Hora", "Nº Empleados"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTablePrincipal);
+
+        jLabel1.setText("Busqueda por fecha:");
+
+        jTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFechaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Búsqueda por código:");
+
+        jTextFieldCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodActionPerformed(evt);
+            }
+        });
 
         jMenuPrincipal.setText("Gestionar reformas");
 
@@ -91,24 +137,46 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelIMG)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldCod))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelIMG)
-                    .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelIMG))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -128,14 +196,46 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
-public void agregarFilaATabla(String[] campos) {
-    if (campos.length != 11) {
-        throw new IllegalArgumentException("El array debe contener exactamente 11 elementos.");
-    }
+    private void jTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
 
-    DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
-    model.addRow(campos);
-}
+        if (sorter == null) {
+            sorter = new TableRowSorter<>(model);
+            jTablePrincipal.setRowSorter(sorter);
+        }
+
+        String textoFiltro = jTextFieldFecha.getText();
+
+        if (textoFiltro.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+           
+            RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(textoFiltro, 5);
+            sorter.setRowFilter(filter);
+        }
+    
+    }//GEN-LAST:event_jTextFieldFechaActionPerformed
+
+    private void jTextFieldCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodActionPerformed
+      DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
+
+        if (sorter == null) {
+            sorter = new TableRowSorter<>(model);
+            jTablePrincipal.setRowSorter(sorter);
+        }
+
+        String textoFiltro = jTextFieldFecha.getText();
+
+        if (textoFiltro.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+           
+            RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(textoFiltro, 0);
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_jTextFieldCodActionPerformed
+
+
     /**
      * @param args the command line arguments
      */
@@ -171,10 +271,13 @@ public void agregarFilaATabla(String[] campos) {
                 new FormularioPrincipal().setVisible(true);
             }
         });
-    }
-
+    }   
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNuevaRef;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelIMG;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemNuevaRef;
@@ -182,5 +285,7 @@ public void agregarFilaATabla(String[] campos) {
     private javax.swing.JMenu jMenuPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePrincipal;
+    private javax.swing.JTextField jTextFieldCod;
+    private javax.swing.JTextField jTextFieldFecha;
     // End of variables declaration//GEN-END:variables
 }

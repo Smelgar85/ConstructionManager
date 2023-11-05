@@ -4,6 +4,7 @@
  */
 package tarea1_12;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -638,7 +639,7 @@ private void deshabilitaTodosServicios() {
        insercion[7]=seleccionServicios;
        insercion[8]=(String) jComboBoxEncargado.getSelectedItem();
        /*Esto que sigue es redundante, pues el jDialog debería evitar que el usuario pueda introducir un valor superior al establecido.
-       En caso de que de alguna forma se introduzca un número superior, esto debería ajustarlos al nivel máximo y mínimo en caso de superar el umbral.
+       En caso de que de alguna forma se introduzca un número superior, esto debería ajustarlos al nivel máximo y mínimo en caso de superar el umbral, antes de insertarlos.
         */
         if (coste < 0) {
             coste = 0.00;
@@ -652,9 +653,9 @@ private void deshabilitaTodosServicios() {
         insercion[10] = Integer.toString(valorEmpleados);
         //Esto hace la inserción de la tabla:
         parentPrincipal.agregarFilaATabla(insercion);
-
+        JOptionPane.showMessageDialog(this, "Registro insertado correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_jButtonGuardarRegistroActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -692,7 +693,6 @@ private void deshabilitaTodosServicios() {
            dialog.setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JButton jButtonGuardarRegistro;

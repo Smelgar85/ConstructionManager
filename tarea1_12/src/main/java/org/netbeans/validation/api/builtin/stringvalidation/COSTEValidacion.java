@@ -16,7 +16,7 @@ public class COSTEValidacion extends StringValidator {
 
     @Override
     public void validate(Problems prblms, String CUENTA, String t) {
-        String regex = "[0-9]?[0-9]{1}(\\.[0-9]{2})?";
+        String regex = "[0-9]?[0-9]{1}(\\.[0-9]{2})";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(t);
         if (!matcher.matches()) {
