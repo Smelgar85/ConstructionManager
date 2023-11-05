@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tarea1_12;
-import org.sqlite.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -25,20 +28,67 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
         initComponents();
+        cargarDatosDesdeBD();
         
         
     }
     
-    public void agregarFilaATabla(String[] campos) {
-    if (campos.length != 11) {
-        throw new IllegalArgumentException("El array debe contener exactamente 11 elementos.");
-    }
-
+    private void cargarDatosDesdeBD() {
     DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
-    model.addRow(campos);
-
+    model.setRowCount(0); // Limpiar la tabla antes de cargar datos
+    String basedatos = "encargos";
+    String url = "jdbc:sqlite:" + basedatos + ".db";
+    
+    //Creamos la base de datos en caso de que no exista
+    try (Connection connection = DriverManager.getConnection(url)) {
+        //Esto crea la base de datos y define la estructura de la tabla en caso de que no existiese
+        String crearTablaSQL = "CREATE TABLE IF NOT EXISTS registro ("
+                + "codigo VARCHAR(5), "
+                + "nombre VARCHAR(20), "
+                + "apellidos VARCHAR(30), "
+                + "telefono VARCHAR(9), "
+                + "direccion VARCHAR(30), "
+                + "fecha VARCHAR(10), "
+                + "tipo VARCHAR(10), "
+                + "servicios VARCHAR(70), "
+                + "encargado VARCHAR(20), "
+                + "coste VARCHAR(5), "
+                + "nempleados VARCHAR(2))";
+        
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(crearTablaSQL);
+        }    
+		} catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error al crear la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+    }    
+    
+    
+    
+    
+    try (Connection connection = DriverManager.getConnection(url)) {
+        String selectQuery = "SELECT * FROM registro";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(selectQuery)) {
+            while (resultSet.next()) {
+                String[] rowData = new String[11];
+                rowData[0] = resultSet.getString("codigo");
+                rowData[1] = resultSet.getString("nombre");
+                rowData[2] = resultSet.getString("apellidos");
+                rowData[3] = resultSet.getString("direccion");
+                rowData[4] = resultSet.getString("telefono");
+                rowData[5] = resultSet.getString("fecha");
+                rowData[6] = resultSet.getString("tipo");
+                rowData[7] = resultSet.getString("servicios");
+                rowData[8] = resultSet.getString("encargado");
+                rowData[9] = resultSet.getString("coste");
+                rowData[10] = resultSet.getString("nempleados");
+                model.addRow(rowData);
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error al cargar datos desde la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +106,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jTextFieldFecha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCod = new javax.swing.JTextField();
+        jButtonBorrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrincipal = new javax.swing.JMenu();
         jMenuItemNuevaRef = new javax.swing.JMenuItem();
@@ -64,7 +116,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabelIMG.setIcon(new javax.swing.ImageIcon("C:\\Users\\FULLPOWAH\\Documents\\NetBeansProjects\\ud1final-Smelgar85\\tarea1_12\\src\\main\\java\\images\\Logo_Construccion_small.png")); // NOI18N
+        jLabelIMG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_Construccion_small.png"))); // NOI18N
         jLabelIMG.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jButtonNuevaRef.setText("Nueva Reforma");
@@ -109,6 +161,20 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonBorrar.setText("Borrar seleccionado");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Actualizar listado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jMenuPrincipal.setText("Gestionar reformas");
 
         jMenuItemNuevaRef.setText("Nueva reforma");
@@ -143,7 +209,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
@@ -153,7 +219,10 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
                                         .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
@@ -162,18 +231,22 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelIMG))
+                    .addComponent(jLabelIMG)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonNuevaRef, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -195,7 +268,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
-
+//Este es el sorter que nos permite filtrar los resultados por fecha:
     private void jTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
 
@@ -215,7 +288,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
-
+//Este es el sorter que nos permite filtrar los resultados por código:
     private void jTextFieldCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodActionPerformed
       DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
 
@@ -224,7 +297,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             jTablePrincipal.setRowSorter(sorter);
         }
 
-        String textoFiltro = jTextFieldFecha.getText();
+        String textoFiltro = jTextFieldCod.getText();
 
         if (textoFiltro.length() == 0) {
             sorter.setRowFilter(null);
@@ -234,6 +307,43 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             sorter.setRowFilter(filter);
         }
     }//GEN-LAST:event_jTextFieldCodActionPerformed
+//Con este botón borramos el elemento seleccionado en la tabla
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+       DefaultTableModel model = (DefaultTableModel) jTablePrincipal.getModel();
+    int selectedRow = jTablePrincipal.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona una fila para borrar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String codigo = (String) model.getValueAt(selectedRow, 0);
+
+    int confirmarBorrado = JOptionPane.showConfirmDialog(this, "¿Seguro que deseas borrar este registro?", "Confirmar Borrado", JOptionPane.YES_NO_OPTION);
+
+    if (confirmarBorrado == JOptionPane.YES_OPTION) {
+        String basedatos = "encargos";
+        String url = "jdbc:sqlite:" + basedatos + ".db";
+
+        try (Connection connection = DriverManager.getConnection(url)) {
+            String deleteQuery = "DELETE FROM registro WHERE codigo = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+                preparedStatement.setString(1, codigo);
+                preparedStatement.executeUpdate();
+            }
+
+            // Remueve la fila seleccionada de la tabla
+            model.removeRow(selectedRow);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al borrar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cargarDatosDesdeBD();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     /**
@@ -275,6 +385,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonNuevaRef;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

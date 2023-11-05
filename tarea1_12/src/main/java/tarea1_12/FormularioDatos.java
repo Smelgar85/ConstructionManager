@@ -5,6 +5,10 @@
 package tarea1_12;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +22,7 @@ import org.netbeans.validation.api.ui.ValidationGroup;
  * @author Sebastián Melgar Marín
  */
 public class FormularioDatos extends javax.swing.JDialog {
-         private final FormularioPrincipal parentPrincipal;
+      
     /**
      * Creates new form FormularioDatos
      * @param parent
@@ -29,7 +33,6 @@ public class FormularioDatos extends javax.swing.JDialog {
     
     public FormularioDatos(FormularioPrincipal parent, boolean modal) {
         super(parent, modal);
-        this.parentPrincipal = parent;
         initComponents();
         deshabilitaTodosServicios();
         jButtonGuardarRegistro.setEnabled(false);
@@ -153,6 +156,7 @@ private void deshabilitaTodosServicios() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setResizable(false);
 
         jLabelCodigo.setText("Codigo");
         jLabelCodigo.setToolTipText("Código de cliente (5 cifras)");
@@ -562,9 +566,8 @@ private void deshabilitaTodosServicios() {
         return String.join(", ", selecciones);
     }
 }
-   
+   //Esto verifica si al menos uno de los checkboxes está marcado, esto se usará en la verificación cuando se pulsa el botón guardar.
    private boolean algunCheckBoxMarcado() {
-    //Verifica si al menos uno de los checkboxes está marcado, esto se usará en la verificación cuando se pulsa el botón guardar.
     return jCheckBoxEstructura.isSelected() ||
            jCheckBoxCimentacion.isSelected() ||
            jCheckBoxAlbanileria.isSelected() ||
@@ -607,40 +610,45 @@ private void deshabilitaTodosServicios() {
     }//GEN-LAST:event_jFormattedTextFieldFechaActionPerformed
 
     private void jButtonGuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarRegistroActionPerformed
-        double coste = Double.parseDouble(jTextFieldCoste.getText());
-        String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+       
+
+    double coste = Double.parseDouble(jTextFieldCoste.getText());
+    String selectedOption = jComboBoxEncargado.getSelectedItem().toString();
+    String basedatos = "encargos";
+    String url = "jdbc:sqlite:" + basedatos + ".db";
+    
+    if (!algunCheckBoxMarcado()) {
+        JOptionPane.showMessageDialog(this, "Es necesario marcar un servicio", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    if (selectedOption.equals("Subcontrata") && coste > 80.00) {
+        JOptionPane.showMessageDialog(this, "El precio máximo para subcontrata es de 80.00€", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    if ((selectedOption.equals("Empleados propios") || selectedOption.equals("Autónomos")) && coste > 99.99) {
+        JOptionPane.showMessageDialog(this, "El precio máximo para Empleados propios y Autónomos es de 99.99€", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    //Aqui comienza el proceso de inserción de datos, primero recogemos los datos y se almacenan en un array
+      try (Connection connection = DriverManager.getConnection(url)) {
+       
+        String seleccionTipo = obtenerSeleccionTipo();
+        String seleccionServicios = obtenerSeleccionesServicios();
+        int valorEmpleados = (int) jSpinnerNEmpleados.getValue();
+        String[] insercion = new String[11];
+        insercion[0] = jTextFieldCodigo.getText();
+        insercion[1] = jTextFieldNombre.getText();
+        insercion[2] = jTextFieldApellidos.getText();
+        insercion[4] = jTextFieldTelefono.getText();
+        insercion[3] = jTextFieldDireccion.getText();
+        insercion[5] = jFormattedTextFieldFecha.getText();
+        insercion[6] = seleccionTipo;
+        insercion[7] = seleccionServicios;
+        insercion[8] = (String) jComboBoxEncargado.getSelectedItem();
         
-        if (!algunCheckBoxMarcado()) {
-        // Ningún servicio está marcado, muestra un mensaje y no procedas
-            JOptionPane.showMessageDialog(this, "Es necesario marcar un servicio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        if(selectedOption.equals("Subcontrata") && coste > 80.00){
-           JOptionPane.showMessageDialog(this, "El precio máximo para subcontrata es de 80.00€", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if ((selectedOption.equals("Empleados propios") || selectedOption.equals("Autónomos")) && coste > 99.99) {
-           JOptionPane.showMessageDialog(this, "El precio máximo para Empleados propios y Autónomos es de 99.99€", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-           
-       String seleccionTipo = obtenerSeleccionTipo();
-       String seleccionServicios = obtenerSeleccionesServicios();
-       int valorEmpleados = (int) jSpinnerNEmpleados.getValue();
-       String []insercion = new String[11];
-       insercion[0]=jTextFieldCodigo.getText();
-       insercion[1]=jTextFieldNombre.getText();
-       insercion[2]=jTextFieldApellidos.getText();
-       insercion[4]=jTextFieldTelefono.getText();
-       insercion[3]=jTextFieldDireccion.getText();
-       insercion[5]=jFormattedTextFieldFecha.getText();
-       insercion[6]=seleccionTipo;
-       insercion[7]=seleccionServicios;
-       insercion[8]=(String) jComboBoxEncargado.getSelectedItem();
-       /*Esto que sigue es redundante, pues el jDialog debería evitar que el usuario pueda introducir un valor superior al establecido.
-       En caso de que de alguna forma se introduzca un número superior, esto debería ajustarlos al nivel máximo y mínimo en caso de superar el umbral, antes de insertarlos.
-        */
         if (coste < 0) {
             coste = 0.00;
         } else if (selectedOption.equals("Subcontrata") && coste > 80.00) {
@@ -651,10 +659,27 @@ private void deshabilitaTodosServicios() {
         jTextFieldCoste.setText(String.valueOf(coste));
         insercion[9] = String.valueOf(coste);
         insercion[10] = Integer.toString(valorEmpleados);
-        //Esto hace la inserción de la tabla:
-        parentPrincipal.agregarFilaATabla(insercion);
-        JOptionPane.showMessageDialog(this, "Registro insertado correctamente", "Success", JOptionPane.INFORMATION_MESSAGE);
-        
+
+        //Si se han superado todas las validaciones anteriores, ahora se insertan los datos en la BD
+        String insertQuery = "INSERT INTO registro (codigo, nombre, apellidos, telefono, direccion, fecha, tipo, servicios, encargado, coste, nempleados) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+            preparedStatement.setString(1, insercion[0]);
+            preparedStatement.setString(2, insercion[1]);
+            preparedStatement.setString(3, insercion[2]);
+            preparedStatement.setString(4, insercion[3]);
+            preparedStatement.setString(5, insercion[4]);
+            preparedStatement.setString(6, insercion[5]);
+            preparedStatement.setString(7, insercion[6]);
+            preparedStatement.setString(8, insercion[7]);
+            preparedStatement.setString(9, insercion[8]);
+            preparedStatement.setString(10, insercion[9]);
+            preparedStatement.setString(11, insercion[10]);
+
+            preparedStatement.executeUpdate();
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error al insertar datos", "Error", JOptionPane.ERROR_MESSAGE);
+    }         
     }//GEN-LAST:event_jButtonGuardarRegistroActionPerformed
     /**
      * @param args the command line arguments
