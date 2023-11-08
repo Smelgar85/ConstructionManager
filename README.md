@@ -6,7 +6,7 @@ En primer lugar tuve que escoger un formato que mostrase correctamente los datos
 
 ![imagen1](img/Imagen1.png)
 
-En esta ventana se muestran la tabla con los registros de reformas. En un principio los datos se cargaban desde la ventana de registro y se almacenaban en memoria, pero al implementar SQLITE introduje el botón de borrar, y he añadido además un botón de actualizar, pues al añadir nuevos desde la ventana de registro en la base de datos, no se mostraban en la lista de la ventana principal automáticamente. La ventana dispone de dos campos con los que filtrar los resultados por fecha y código, usando TableRowSorter.
+En esta ventana se muestran la tabla con los registros de reformas. La ventana dispone de dos campos con los que filtrar los resultados por fecha y código, usando TableRowSorter.
 
 Tuve un problema con el logo, y es que no había manera de que Netbeans compilase si no se especificaba su ruta completa, con la ruta relativa no funcionaba. Finalmente encontré la solución, hay que crear una carpeta llamada “resources” dentro de la carpeta “main”, y en ese lugar colocar las imágenes que se desean usar. De ese modo, el proyecto ya compila y se puede exportar y usar sin problemas en otros equipos.
 
