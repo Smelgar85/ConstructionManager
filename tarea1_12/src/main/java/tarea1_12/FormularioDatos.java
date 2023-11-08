@@ -22,7 +22,7 @@ import org.netbeans.validation.api.ui.ValidationGroup;
  * @author Sebastián Melgar Marín
  */
 public class FormularioDatos extends javax.swing.JDialog {
-      
+    private FormularioPrincipal formularioPrincipal;
     /**
      * Creates new form FormularioDatos
      * @param parent
@@ -33,6 +33,7 @@ public class FormularioDatos extends javax.swing.JDialog {
     
     public FormularioDatos(FormularioPrincipal parent, boolean modal) {
         super(parent, modal);
+        this.formularioPrincipal = parent;
         initComponents();
         deshabilitaTodosServicios();
         jButtonGuardarRegistro.setEnabled(false);
@@ -674,8 +675,11 @@ private void deshabilitaTodosServicios() {
             preparedStatement.setString(9, insercion[8]);
             preparedStatement.setString(10, insercion[9]);
             preparedStatement.setString(11, insercion[10]);
-
             preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+            formularioPrincipal.actualizarTabla();
+            this.dispose();
+            
         }
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(this, "Error al insertar datos", "Error", JOptionPane.ERROR_MESSAGE);

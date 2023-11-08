@@ -107,7 +107,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCod = new javax.swing.JTextField();
         jButtonBorrar = new javax.swing.JButton();
-        jButtonActualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrincipal = new javax.swing.JMenu();
         jMenuItemNuevaRef = new javax.swing.JMenuItem();
@@ -168,13 +167,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonActualizar.setText("Actualizar listado");
-        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonActualizarActionPerformed(evt);
-            }
-        });
-
         jMenuPrincipal.setText("Gestionar reformas");
 
         jMenuItemNuevaRef.setText("Nueva reforma");
@@ -220,9 +212,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
+                                .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
@@ -244,9 +234,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonActualizar)))
+                            .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -341,10 +329,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
-    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        cargarDatosDesdeBD();
-    }//GEN-LAST:event_jButtonActualizarActionPerformed
-
+    public void actualizarTabla() {
+    cargarDatosDesdeBD();
+    }
 
     /**
      * @param args the command line arguments
@@ -385,7 +372,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonNuevaRef;
     private javax.swing.JLabel jLabel1;
